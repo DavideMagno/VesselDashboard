@@ -1,6 +1,5 @@
 source(here::here("R/map.R"))
 
-
 testthat::test_that("Vessel Selection Returns Data", {
   temp <- tempfile(fileext = ".zip")
   download.file(glue::glue("https://drive.google.com/uc?authuser=0&id=160JnqoQ\\

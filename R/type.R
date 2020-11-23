@@ -1,7 +1,7 @@
 selectTypeInput <- function(id, data) {
   types <- unique(data$ship_type)
   selectInput(NS(id, "type"), 
-              "Pick a vassel type", 
+              "Pick a vessel type", 
               choices = c("All", sort(types)),
               selected = "All",
               multiple = FALSE)

@@ -4,6 +4,11 @@ CommentaryUI <- function(id) {
           textOutput(NS(id, "commentary"))))
 }
 
+# There are three cases that are managed:
+# 1. More than 1 vessel is selected
+# 2. One vessel is selected but has always been parked
+# 3. One vessel is selected and it has moved
+# The control is conveniently on the size of the output of the calculation algorithm
 CommentaryServer <- function(id, input_from_calculation, type) {
   moduleServer(id, function(input, output, session) {
     

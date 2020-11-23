@@ -1,6 +1,8 @@
 
 # Distance Algorithm + Functions For One Vessel --------------------------------
 
+# We use the geosphere::distHaversine function to calculate the distance between
+# two observations. We then extract start and ending point.
 CalculateDistance <- function(input.data) {
   n <- nrow(input.data)
   
@@ -22,6 +24,14 @@ CalculateDistance <- function(input.data) {
   return(data)
 }
 
+# If one specific vessel is selected, we run the distance algorithm, which consists
+# of the following steps:
+# 1. If the vessel has always been parked, we just record its latest available position
+# 2. Otherwise, we group the observations by port and date. It is possible in fact
+# that a vessel has been reported by two different ports at the same time
+# 3. If there are at least 2 consecutive observations per group, we run the 
+# distance calculation algorithm
+# 4. We then plot the results in the map depending on steps 1. and 3. 
 MapOneVessel <- function(data) {
   test_parked <- nrow(dplyr::filter(data, !is_parked))
   
@@ -78,6 +88,7 @@ MapOneVessel <- function(data) {
 
 # Functions For More Vessels------------- --------------------------------
 
+# Specifics of the leaflet map for each of the port
 MapMoreVessels <- function(port, data) {
   
   ship_types <- unique(data$ship_type)
@@ -102,6 +113,10 @@ MapMoreVessels <- function(port, data) {
   
 }
 
+
+# If more vessels are selected, we extract the latest known observation per port and
+# map it. As there are 6 different ports, we repeat this sequentially with the
+# purrr::map2 function
 MultipleMapsMoreVessels <- function(data) {
   data_for_map <- data %>% 
     dplyr::group_by(SHIPNAME) %>% 
@@ -128,6 +143,7 @@ plotMapUI <- function(id) {
 
 plotMapServer <- function(id, data) {
   moduleServer(id, function(input, output, session) {
+    # Two different analysis are run whether one specific vessel is selected or not
     map <- reactive({
       if (length(unique(data()$SHIPNAME)) == 1) {
         MapOneVessel(data())
@@ -136,6 +152,8 @@ plotMapServer <- function(id, data) {
       }
     })
     
+    # The leafsync package allows to create a lattice of leaflet maps in one
+    # predefined frame
     output$map <- renderUI(leafsync::latticeview(map()$map, ncol = map()$ncol))
     
     return(reactive(map()$data))

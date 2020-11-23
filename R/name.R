@@ -1,11 +1,12 @@
 selectVesselInput <- function(id, type) {
-  selectInput(NS(id, "name"), label = "Pick a vassel name", 
+  selectInput(NS(id, "name"), label = "Pick a vessel name", 
               choices = character(0)) 
 }
 
 selectVesselServer <- function(id, type, data) {
   moduleServer(id, function(input, output, session) {
     
+    # Change the list of vessel names dependin on the vessel type selected
     observeEvent(type(), {
       if (grepl("All", type())) {
         choices = "All"
@@ -23,6 +24,7 @@ selectVesselServer <- function(id, type, data) {
                         selected = head(choices, 1))
     })
     
+    # Filter the database based on the type and name of the vessel
     reactive({
       if (grepl("All", type())) {
         res <- data
