@@ -5,11 +5,11 @@ This the main repository for the Vessel Dashboard available at
 
 You can clone the repository and run the dashboard without any additional code change.
 
-I will detail here some implementation choices I have taken when coding the dashboard.
+I will detail here some implementation choices I have taken.
 
 **1. Loading of external data**
 
-The dataset is significantly big (xxx MB). It can't hence be uploaded on Github
+The dataset is significantly big (500 MB). It can't hence be uploaded on Github
 since the maximum size for uploads is 100Mb. 
 
 From a design perspective, I have preferred to write a code that could be run 
@@ -71,4 +71,8 @@ tow observations:
   
   * **[File organisation]**: naming conventions and file locations have been defined in line with what recommended 
   in the ["Mastering Shine"](https://mastering-shiny.org/index.html) book.
+  
+**4. Optimization for mobile **
+
+The multi-faceted leaflet map is not optimised for mobile. The dashboard is best visualized on computer/tablet in horizontal.
 
