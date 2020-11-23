@@ -72,7 +72,7 @@ tow observations:
   * **[File organisation]**: naming conventions and file locations have been defined in line with what recommended 
   in the ["Mastering Shine"](https://mastering-shiny.org/index.html) book.
   
-**4. Optimization for mobile **
+**4. Optimization for mobile**
 
 The multi-faceted leaflet map is not optimised for mobile. The dashboard is best visualized on computer/tablet in horizontal.
 
