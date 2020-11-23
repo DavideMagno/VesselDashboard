@@ -1,0 +1,12 @@
+name: VesselDashboard
+title: VesselDashboard
+username:
+account: dmagno
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3284876
+bundleId: 3892848
+url: https://dmagno.shinyapps.io/VesselDashboard/
+when: 1606093648.4832
+asMultiple: FALSE
+asStatic: FALSE
